@@ -1,4 +1,5 @@
 import os
+import sys
 from math import sqrt
 
 def Divided(number, divisor):
@@ -199,23 +200,47 @@ def LittlePrimeTest():
 
 
 def IsPrime(num):
+	"""
+	使用暴力的方法判断判断一个数是否是素数
+	"""
 	endNum  = int(sqrt(num)+1)
 	for i in range(2, endNum):
 		if num%i == 0:
 			return False
 	return True
 
-def ProbIter():
-	prob = 0.5
-	for pri in range(3, 1000000000):
+def ProbIter(upLimit):
+	"""
+	使用迭代方法求
+	任意给定一个数能够被小素数整除的概率
+	"""
+	prob = 0.0
+
+	for pri in range(2, min(100, upLimit)):
 		if IsPrime(pri):
-			print(prob)
+			#pri是小素数的上界时的概率
 			prob = prob*(pri-1)/pri+1/pri;
+			print(pri,"\t:",prob)
+
+	if upLimit <= 100:
+		return
+	count = 0
+	for pri in range(min(100, upLimit), upLimit):
+		if IsPrime(pri):
+			#pri是小素数的上界时的概率
+			prob = prob*(pri-1)/pri+1/pri;
+			count += 1
+			if(count % 10000  == 0):
+				count = 0
+				print(pri,"\t:",prob)
 
 
 def main():
-	#LittlePrimeTest()
-	ProbIter()
+	if len(sys.argv) != 1:
+		upLimit = int(sys.argv[1])
+	else:
+		upLimit = 100
+	ProbIter(upLimit)
 
 
 if __name__ == '__main__':

@@ -7,6 +7,10 @@ gcd(a,b) = gcd(b, a(mod b))
 import sys
 	
 def Eclid(a,b):
+	"""
+	欧几里得算法
+	求两个数的最大公约数
+	"""
 	if b==0:
 		return a
 	return Eclid(b, a%b)

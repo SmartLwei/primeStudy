@@ -4,7 +4,7 @@
 """
 from math import sqrt
 
-prime = []
+prime = [2]
 
 def TestPrime(num):
 	endNum  = int(sqrt(num)+1)
